@@ -12,7 +12,15 @@
 	  <div class="nav-links">
 	    <a href="<c:url value="/home"/>">Home</a>
 	    <a href="<c:url value="/admin"/>">Admin</a>
-	    <a href="<c:url value="/login"/>">Login</a>
+		<c:choose>
+         <c:when test = "${sessionScope.logged}">
+            <a href="<c:url value="/login?act=logout"/>">Déconnection</a>
+         </c:when>
+         
+         <c:otherwise>
+	    <a href="<c:url value="/login?act=login"/>">Login</a>
+         </c:otherwise>
+      </c:choose>
 	  </div>
 	</div>
 </header>

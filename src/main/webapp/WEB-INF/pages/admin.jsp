@@ -34,7 +34,7 @@
 	<li>${ news._title } |</li>
 	<li>${ fn:substring(news._description, 0, 40) } ...  |</li>
 	<li>
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editNews">
+		<button type="button" class="btn btn-primary" data-bs-target="#editNews${news._id}">
 		  éditer
 		</button>
 	</li>
@@ -45,7 +45,8 @@
 	</li>
 </ul>
 
-<div class="modal fade" id="editNews" tabindex="-1" aria-labelledby="editNewsLabel" aria-hidden="true">
+
+<div class="modal fade" id="editNews${news._id}" tabindex="-1" aria-labelledby="editNewsLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -69,14 +70,5 @@
 
 </c:forEach>
 
-<script>
-$(document).on("click", ".open-AddBookDialog", function () {
-    var myBookId = $(this).data('id');
-    $(".modal-body #bookId").val( myBookId );
-    // As pointed out in comments, 
-    // it is unnecessary to have to manually call the modal.
-    // $('#addBookDialog').modal('show');
-});
-</script>
 </body>
 </html>

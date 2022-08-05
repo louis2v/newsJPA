@@ -15,15 +15,16 @@
 <jsp:include page="inc/_head.jsp" />
 
 <br>
-
-<c:forEach var="news" items="${ news }">
-	<div class="card" style="width: 18rem;">
-	  <img src="${ news._img }" class="card-img-top" alt="...">
-	  <div class="card-body">
-	    <h5 class="card-title">${ news._title }</h5>
-	    <p class="card-text">${ news._description }</p>
-	  </div>
-	</div>
-</c:forEach>
+<div class="allTheNews">
+	<c:forEach var="news" items="${ news }">
+		<div class="card" style="width: 18rem;">
+		  <img src="${ news._img }" class="card-img-top" alt="...">
+		  <div class="card-body">
+		    <h5 class="card-title">${ news._title }</h5>
+		    <p class="card-text">${ news._description }</p>
+		  </div>
+		</div>
+	</c:forEach>
+</div>
 </body>
 </html>

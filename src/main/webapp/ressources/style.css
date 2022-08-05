@@ -18,6 +18,9 @@ li{
 	margin-right:20px;
 }
 
+.allTheNews{
+	display: flex;
+}
 .nav {
   height: 50px;
   width: 100%;

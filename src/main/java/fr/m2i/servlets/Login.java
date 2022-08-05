@@ -23,6 +23,7 @@ public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String PAGE="/WEB-INF/pages/login.jsp";
 	private static final String ADMIN="/WEB-INF/pages/admin.jsp";
+	private static final String HOME="/WEB-INF/pages/home.jsp";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -38,7 +39,15 @@ public class Login extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		this.getServletContext().getRequestDispatcher(PAGE).forward(request, response);
+
+		String act = request.getParameter("act");
+		if(act.equals("login")) {
+			this.getServletContext().getRequestDispatcher(PAGE).forward(request, response);
+		}else if(act.equals("logout")) {
+			request.getSession().setAttribute("logged", false);
+			User.isConnected = false;
+			this.getServletContext().getRequestDispatcher(HOME).forward(request, response);
+		}
 	}
 
 	/**
@@ -49,9 +58,9 @@ public class Login extends HttpServlet {
 
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
-		Boolean isok = this.checkUser(pseudo,password);
-		if(isok) {
-			User.isConnected = true;
+		//Boolean isok = this.checkUser(pseudo,password);
+		if((boolean) request.getSession().getAttribute("logged")) {
+			//User.isConnected = true;
 			this.getServletContext().getRequestDispatcher(ADMIN).forward(request, response);
 		}else {
 			doGet(request, response);
@@ -59,7 +68,7 @@ public class Login extends HttpServlet {
 	}
 
 	@SuppressWarnings("finally")
-	private Boolean checkUser(String pseudo,String password) {
+	public static Boolean checkUser(String pseudo,String password) {
 
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("UnityPersist");
 		EntityManager em = factory.createEntityManager();

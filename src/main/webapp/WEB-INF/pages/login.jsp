@@ -15,7 +15,7 @@
 
 <fieldset>
 <legend>Connexion</legend>
-<form action="<c:url value="/login"/>" method="POST">
+<form action="<c:url value="/login?act=logout"/>" method="POST">
 	<input type="text" placeholder="pseudo" name="pseudo">
 	<input type="password" placeholder="password" name="password">
 	<input type="submit" value="Se connecter">

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.m2i.models.News;
-import fr.m2i.models.User;
 
 /**
  * Servlet implementation class Admin
@@ -37,10 +36,15 @@ public class Admin extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(User.isConnected) {
-			request.setAttribute("news", Home.getAllNews());
-			this.getServletContext().getRequestDispatcher(PAGE).forward(request, response);
-		}else{
+		try {
+			Boolean isco = (Boolean) request.getSession().getAttribute("logged");
+			if(isco && isco != null) {
+				request.setAttribute("news", Home.getAllNews());
+				this.getServletContext().getRequestDispatcher(PAGE).forward(request, response);
+			}else{
+				this.getServletContext().getRequestDispatcher(LOGIN).forward(request, response);
+			}
+		}catch(Exception e) {
 			this.getServletContext().getRequestDispatcher(LOGIN).forward(request, response);
 		}
 	}
