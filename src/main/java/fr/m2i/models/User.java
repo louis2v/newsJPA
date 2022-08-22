@@ -1,11 +1,15 @@
 package fr.m2i.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,7 +29,12 @@ public class User {
 	@Column(name="password")
 	private String _password;
 
-	public static Boolean isConnected = false;
+	@OneToMany(targetEntity = Commentaires.class, mappedBy="id_user")
+	private List<Commentaires> _commentaire = new ArrayList<>();
+
+
+
+	//	public static Boolean isConnected = false;
 
 	public User() {
 
@@ -56,4 +65,14 @@ public class User {
 	public void set_id(Integer _id) {
 		this._id = _id;
 	}
+
+	public List<Commentaires> get_commentaire() {
+		return _commentaire;
+	}
+
+	public void set_commentaire(List<Commentaires> _commentaire) {
+		this._commentaire = _commentaire;
+	}
+
+
 }

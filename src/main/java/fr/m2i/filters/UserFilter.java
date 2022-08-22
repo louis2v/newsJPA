@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 
 import fr.m2i.servlets.Login;
@@ -18,7 +17,7 @@ import fr.m2i.servlets.Login;
  * Servlet Filter implementation class UserFilter
  */
 @WebFilter("/login")
-public class UserFilter extends HttpFilter implements Filter {
+public class UserFilter implements Filter {
 
 	/**
 	 * @see HttpFilter#HttpFilter()

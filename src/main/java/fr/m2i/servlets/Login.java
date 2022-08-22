@@ -45,7 +45,8 @@ public class Login extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(PAGE).forward(request, response);
 		}else if(act.equals("logout")) {
 			request.getSession().setAttribute("logged", false);
-			User.isConnected = false;
+			request.getSession().removeAttribute("user");
+			//User.isConnected = false;
 			this.getServletContext().getRequestDispatcher(HOME).forward(request, response);
 		}
 	}
@@ -61,6 +62,8 @@ public class Login extends HttpServlet {
 		//Boolean isok = this.checkUser(pseudo,password);
 		if((boolean) request.getSession().getAttribute("logged")) {
 			//User.isConnected = true;
+			HttpServletRequest httpRequest = request;
+			httpRequest.getSession().setAttribute("user", pseudo);
 			this.getServletContext().getRequestDispatcher(ADMIN).forward(request, response);
 		}else {
 			doGet(request, response);
